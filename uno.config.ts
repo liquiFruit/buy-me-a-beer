@@ -1,10 +1,25 @@
-import { defineConfig, presetUno } from "unocss"
+import { defineConfig, presetUno, presetWebFonts } from "unocss"
 import presetShadcn from "./unocss-preset-shadcn-ui"
 import presetAutoprefix from "unocss-preset-autoprefixer"
 
 
-var presets = [presetUno(), presetShadcn()]
-if (true) presets.push(presetAutoprefix())
+var presets = [
+  presetUno(),
+  presetWebFonts({
+    provider: "fontshare",
+    fonts: {
+      title: {
+        name: "Chillax"
+      },
+      body: {
+        name: "Synonym",
+      }
+    }
+  }),
+  presetShadcn()
+]
+if (process.env.PREFIX) presets.push(presetAutoprefix())
+
 
 export default defineConfig({
   presets,
