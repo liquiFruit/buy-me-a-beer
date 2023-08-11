@@ -12,14 +12,32 @@
     "@types/node": "20.4.10",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.14",
+    "@unocss/postcss": "^0.55.0",
+    "@unocss/preset-mini": "^0.55.0",
+    "browserslist": "^4.21.10",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
+    "lightningcss": "^1.21.5",
+    "lucide-react": "^0.265.0",
     "next": "13.4.13",
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "shadcn-ui": "^0.3.0",
+    "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
-  }
+    "typescript": "5.1.6",
+    "unocss": "^0.55.0",
+    "unocss-preset-autoprefixer": "^0.0.6"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11",
+    "Android >= 4.0",
+    "iOS >= 8"
+  ]
 }
