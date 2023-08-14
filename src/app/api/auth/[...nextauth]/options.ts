@@ -19,7 +19,7 @@ export const options: NextAuthOptions = {
         }
       },
       async authorize(credentials) {
-        const user: User = { id: "0", name: "testUsername", email: "testEmail", password: "test" }
+        const user: User = { id: "0", name: "testUsername", email: "testEmail@gmail.com" }
         return user
       }
     })
