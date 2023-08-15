@@ -15,19 +15,19 @@ This is a demonstrational project to show how to accept payments via Paystack in
 ## Setup database
 
 - 1. Clean db files
-  - rm -rf ./src/db/drizzle ./src/db/db.sqlite
+  - `rm -rf ./src/db/drizzle ./src/db/db.sqlite`
 
 - 2. Generate migrations
-  - pnpm drizzle-kit generate:sqlite
+  - `pnpm drizzle-kit generate:sqlite`
 
 - 3. Run migrations
-  - node ./src/db/migrate.js
+  - `node ./src/db/migrate.js`
 
 - 4. Run seed
-  - node ./src/db/seed.js
+  - `node ./src/db/seed.js`
 
 - Optional: Check db 
-  - pnpm drizzle-kit studio
+  - `pnpm drizzle-kit studio`
 
 ## Run development server
 
