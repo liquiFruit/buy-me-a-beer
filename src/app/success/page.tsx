@@ -1,6 +1,11 @@
 import { getServerSession } from "next-auth"
 import { options } from "../api/auth/[...nextauth]/options"
 import Link from "next/link"
+import { redirect } from "next/navigation"
+
+import { getDonationByEmail } from "@/lib/get-donation-by-email"
+import { GetBeerByID } from "@/lib/get-beer-by-id"
+import SignOutButton from "@/components/sign-out-button"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -11,17 +16,14 @@ import {
 	CardContent,
 	CardFooter,
 } from "@/components/ui/card"
-import { GetDonationByEmail } from "@/lib/get-donation-by-email"
-import { GetBeerByID } from "@/lib/get-beer-by-id"
 
 export default async function SuccessfullPayment() {
 	// Check auth
 	const session = await getServerSession(options)
-	if (!session || !session.user || !session.user.email)
-		return <div>error: not authenticated</div>
+	if (!session || !session.user || !session.user.email) redirect("/")
 
 	// Check donation
-	const donation = await GetDonationByEmail(session.user.email)
+	const donation = await getDonationByEmail(session.user.email)
 	if (!donation || !donation.beerID)
 		return <div>error: you have not donated</div>
 
@@ -31,7 +33,7 @@ export default async function SuccessfullPayment() {
 
 	return (
 		<main className="w-full h-screen grid place-items-center">
-			<Card>
+			<Card className="max-w-md">
 				<CardHeader>
 					<CardTitle>
 						Thanks,{" "}
@@ -62,10 +64,8 @@ export default async function SuccessfullPayment() {
 					</div>
 				</CardContent>
 
-				<CardFooter>
-					<Button asChild className="w-full">
-						<Link href={"/"}>Go to home</Link>
-					</Button>
+				<CardFooter className="children:w-full">
+					<SignOutButton />
 				</CardFooter>
 			</Card>
 		</main>

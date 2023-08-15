@@ -15,7 +15,7 @@ import {
 	CardContent,
 	CardFooter,
 } from "@/components/ui/card"
-import { GetDonationByEmail } from "@/lib/get-donation-by-email"
+import { getDonationByEmail } from "@/lib/get-donation-by-email"
 
 export default async function Pay({ params }: { params: { beerID: number } }) {
 	// Check auth
@@ -24,7 +24,7 @@ export default async function Pay({ params }: { params: { beerID: number } }) {
 		return redirect(`/api/auth/signin?callback=/pay/${params.beerID}`)
 
 	// Check donator
-	const donation = await GetDonationByEmail(session.user.email)
+	const donation = await getDonationByEmail(session.user.email)
 	if (donation) return redirect("/success")
 
 	// Check beer

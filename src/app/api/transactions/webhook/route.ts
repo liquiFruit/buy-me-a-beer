@@ -5,6 +5,10 @@ import { NextResponse } from "next/server"
 
 
 async function handler(req: Request) {
+  // Check for body
+  if (!req.bodyUsed)
+    return NextResponse.json({ error: "no body sent" }, { status: 400 })
+
   // Validate event
   const json = await req.json()
 
