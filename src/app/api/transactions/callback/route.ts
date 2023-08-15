@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth"
 
 import { options } from "@/app/api/auth/[...nextauth]/options"
 import { usePaystack } from "@/lib/paystack/use-paystack"
+import { createDonation } from "@/lib/create-donation"
 
 async function handler(req: Response) {
   // Check reference
@@ -31,15 +32,23 @@ async function handler(req: Response) {
 
   // Get transaction details
   const json = await response.json()
-  const details = { paid: json.data.status, customer_email: json.data.customer.email }
+  const details = {
+    paid: json.data.status,
+    customerEmail: json.data.customer.email,
+    beerID: json.data.metadata.beerID
+  }
 
   // Check authorization
-  if (details.customer_email !== session.user.email!.toLowerCase()) return NextResponse.json(
+  if (details.customerEmail !== session.user.email!.toLowerCase()) return NextResponse.json(
     { error: "Unauthorized to view this transaction." }, { status: 403 })
 
   // Check transaction status
   if (!details.paid) return NextResponse.json(
     { status: "Transaction was not successfull." }, { status: 200 })
+
+  // Create new donation
+  if (!await createDonation(details.customerEmail, details.beerID)) return NextResponse.json(
+    { error: `Unable to record donation. Use reference as POP. REF: ${reference}` })
 
   // Redirect successfully
   const redirect_url = new URL("/success", req.url)

@@ -1,12 +1,17 @@
 "use server"
 
+import { Beer } from "@/db"
 import { usePaystack } from "./paystack/use-paystack"
 
-export async function createPayment(email: string, amount: number): Promise<string | null> {
+export async function createPayment(email: string, beer: Beer): Promise<string | null> {
   var response = await usePaystack({
     endpoint: "/transaction/initialize",
     body: {
-      email, amount,
+      email,
+      amount: beer.price,
+      metadata: {
+        beerID: beer.id
+      }
     },
     callbackUrl: true
   })

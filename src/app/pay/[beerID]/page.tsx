@@ -15,17 +15,25 @@ import {
 	CardContent,
 	CardFooter,
 } from "@/components/ui/card"
+import { GetDonationByEmail } from "@/lib/get-donation-by-email"
 
 export default async function Pay({ params }: { params: { beerID: number } }) {
+	// Check auth
 	const session = await getServerSession(options)
 	if (!session || !session.user || !session.user.email)
 		return redirect(`/api/auth/signin?callback=/pay/${params.beerID}`)
 
+	// Check donator
+	const donation = await GetDonationByEmail(session.user.email)
+	if (donation) return redirect("/success")
+
+	// Check beer
 	const beer = await GetBeerByID(params.beerID)
 	if (!beer)
 		return <div>error getting beer information: beer does not exist</div>
 
-	const payment_url = await createPayment(session.user.email, beer.price)
+	// Create payment_url
+	const payment_url = await createPayment(session.user.email, beer)
 	if (!payment_url) return <div>error generating payment url</div>
 
 	return (

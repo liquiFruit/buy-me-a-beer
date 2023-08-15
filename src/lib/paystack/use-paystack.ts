@@ -13,7 +13,7 @@ type IPaystackFetchOptions = {
   endpoint: PaystackEndpoint
   suffix?: string
   body?: object
-  method?: string,
+  method?: string
   callbackUrl?: string | true
 }
 
