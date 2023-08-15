@@ -1,4 +1,4 @@
-"use server"
+
 
 const HOSTNAME = 'api.paystack.co'
 const AUTH_HEADERS = {

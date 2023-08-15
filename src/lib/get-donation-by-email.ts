@@ -1,4 +1,4 @@
-"use server"
+
 
 import { db, donations, Donation } from "@/db";
 import { eq } from "drizzle-orm";

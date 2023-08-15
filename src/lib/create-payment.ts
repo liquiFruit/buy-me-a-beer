@@ -1,4 +1,4 @@
-"use server"
+
 
 import { Beer } from "@/db"
 import { usePaystack } from "./paystack/use-paystack"

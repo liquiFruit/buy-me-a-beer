@@ -1,4 +1,4 @@
-"use server"
+
 
 import { db, Beer, beers } from "@/db"
 import { eq } from "drizzle-orm"
