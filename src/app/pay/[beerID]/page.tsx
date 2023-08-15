@@ -21,7 +21,7 @@ export default async function Pay({ params }: { params: { beerID: number } }) {
 	// Check auth
 	const session = await getServerSession(options)
 	if (!session || !session.user || !session.user.email)
-		return redirect(`/api/auth/signin?callback=/pay/${params.beerID}`)
+		return redirect(`/api/auth/signin?callbackUrl=/pay/${params.beerID}`)
 
 	// Check donator
 	const donation = await getDonationByEmail(session.user.email)
