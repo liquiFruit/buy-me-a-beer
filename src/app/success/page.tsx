@@ -25,7 +25,12 @@ export default async function SuccessfullPayment() {
 	// Check donation
 	const donation = await getDonationByEmail(session.user.email)
 	if (!donation || !donation.beerID)
-		return <div>error: you have not donated</div>
+		return (
+			<div>
+				error: you have not donated. if this is a mistake, perhaps the
+				server is still waiting for confirmation from paystack.
+			</div>
+		)
 
 	// Get beer
 	const beer = await GetBeerByID(donation.beerID)

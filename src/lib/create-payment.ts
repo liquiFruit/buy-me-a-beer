@@ -1,7 +1,7 @@
 
 
 import { Beer } from "@/db"
-import { usePaystack } from "./paystack/use-paystack"
+import { usePaystack } from "@/lib/use-paystack"
 
 export async function createPayment(email: string, beer: Beer): Promise<string | null> {
   var response = await usePaystack({

@@ -1,14 +1,16 @@
-
-
-import { db, donations, } from "@/db";
+import { db, donations, } from "@/db"
 
 export async function createDonation(userEmail: string, beerID: number) {
   try {
     const donation = await db
       .insert(donations)
-      .values({ userEmail, beerID })
+      .values({ userEmail: userEmail, beerID })
       .run()
 
     return true
-  } catch (error) { return false }
+  } catch (error) {
+    console.log("error creating donation:")
+    console.log(error)
+    return false
+  }
 }

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 
 import { options } from "@/app/api/auth/[...nextauth]/options"
-import { usePaystack } from "@/lib/paystack/use-paystack"
+import { usePaystack } from "@/lib/use-paystack"
 import { createDonation } from "@/lib/create-donation"
 
 async function handler(req: Response) {
@@ -39,7 +39,7 @@ async function handler(req: Response) {
   }
 
   // Check authorization
-  if (details.customerEmail !== session.user.email!.toLowerCase()) return NextResponse.json(
+  if (details.customerEmail !== session.user.email!) return NextResponse.json(
     { error: "Unauthorized to view this transaction." }, { status: 403 })
 
   // Check transaction status
