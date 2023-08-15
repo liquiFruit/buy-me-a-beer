@@ -14,6 +14,8 @@ This is a demonstrational project to show how to accept payments via Paystack in
 
 ## Setup database
 
+To setup the database either run `pnpm init-db` or individual commands below:
+
 - 1. Clean db files
   - `rm -rf ./src/db/drizzle ./src/db/db.sqlite`
 
